@@ -2,12 +2,12 @@ package com.udavinci.unidades.IV;
 
 import java.util.Scanner;
 
-public class CalculoDias {
+public class DaysCalculator {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Bienvenido a la calculadora de días en un mes\n");
+        System.out.println("Bienvenido a la calculadora de días en un mes.\n");
         System.out.print("Ingrese el número de mes (1-12): ");
         int month = scanner.nextInt();
 
