@@ -19,9 +19,6 @@ public class DaysCalculator {
         System.out.print("Ingrese el año: ");
         int year = scanner.nextInt();
 
-        // divisible entre 4 y no divisible entre cien ó divisible entre 400
-        boolean isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-
         int numberDaysInMonth = 0;
 
         switch (month) {
@@ -41,7 +38,7 @@ public class DaysCalculator {
                 numberDaysInMonth = 30;
                 break;
             case 2:
-                if (isLeap) {
+                if (isLeap(year) ) {
                     numberDaysInMonth = 29;
                 } else {
                     numberDaysInMonth = 28;
@@ -52,5 +49,11 @@ public class DaysCalculator {
         System.out.println("El mes " + month + " del año " + year + " tiene " + numberDaysInMonth + " días.");
 
         scanner.close();
+    }
+
+    // Función para determinar si un año es bisiesto
+    public static boolean isLeap(int year) {
+        // divisible entre 4 y no divisible entre cien ó divisible entre 400
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
 }
