@@ -2,12 +2,12 @@ package com.udavinci.unidades.IV;
 
 import java.util.Scanner;
 
-public class TiendaDeAbarrotes {
+public class GroceryStore {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Bienvenido a la tienda de abarrotes\n");
+        System.out.println("Bienvenido a la tienda de abarrotes.\n");
         System.out.print("Ingrese el número de unidades a comprar: ");
         int unitsToBuy = scanner.nextInt();
 
