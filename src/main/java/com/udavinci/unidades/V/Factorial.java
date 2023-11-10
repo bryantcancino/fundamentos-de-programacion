@@ -13,7 +13,7 @@ public class Factorial {
         scanner.close();
 
         // Paso 3: Validar que el número ingresado sea un entero positivo
-        if (number < 0) {
+        if (number <= 0) {
             System.out.println("Error: El número ingresado no es un entero positivo.");
         } else {
             // Paso 4: Calcular el factorial del número
