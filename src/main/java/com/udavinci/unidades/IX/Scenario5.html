@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Usuario GitHub con AJAX</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        /* Agrega estilos si es necesario */
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button onclick="fetchUserData()">Obtener Datos de Usuario Seleccionado</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function fetchUserData() {
+            const userToSearch = 'mojodna'
+            // Hacer la solicitud AJAX usando jQuery
+            $.ajax({
+                url: 'https://api.github.com/users',
+                method: 'GET',
+                success: function (usersData) {
+                    // Buscar el registro correspondiente al login persistido en la variable userToSearch
+                    const user = usersData.find(user => user.login === userToSearch);
+
+                    if (user) {
+                        // Imprimir los valores del registro correspondiente a la variable userToSearch
+                        displayUserData(user);
+                    } else {
+                        displayError('Usuario "'+userToSearch+'" no encontrado.');
+                    }
+                },
+                error: function () {
+                    displayError('Error al obtener datos de usuarios.');
+                }
+            });
+        }
+
+        function displayUserData(userData) {
+          // Mostrar los datos del usuario en el elemento con id "result"
+          const resultContainer = document.getElementById('result');
+          resultContainer.innerHTML = `
+              <h2>Valores del Registro Completo:</h2>
+              <p><strong>Login:</strong> ${userData.login}</p>
+              <p><strong>ID:</strong> ${userData.id}</p>
+              <p><strong>Name:</strong> ${userData.name}</p>
+              <p><strong>Avatar:</strong> <img alt="avatar" src="${userData.avatar_url}"></p>
+              <p><strong>URL:</strong> ${userData.url}</p>
+              <p><strong>HTML URL:</strong> ${userData.html_url}</p>
+              <p><strong>Followers Number:</strong> ${userData.followers}</p>
+              <p><strong>Followers URL:</strong> ${userData.followers_url}</p>
+              <p><strong>Subscriptions:</strong> ${userData.subscriptions_url}</p>
+              <p><strong>Organizations:</strong> ${userData.organizations_url}</p>
+              <p><strong>Repos:</strong> ${userData.repos_url}</p>
+              <p><strong>Subscriptions:</strong> ${userData.subscriptions_url}</p>
+              <p><strong>Node:</strong> ${userData.node_id}</p>
+              <!-- Agrega más información según sea necesario -->
+          `;
+        }
+
+        function displayError(message) {
+            // Mostrar mensajes de error en el elemento con id "result"
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = `<p style="color: red;">${message}</p>`;
+        }
+
+    </script>
+</body>
+</html>
