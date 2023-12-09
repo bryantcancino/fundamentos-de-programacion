@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Usuarios GitHub con async/await</title>
+    <style>
+        /* Agrega estilos si es necesario */
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button onclick="fetchUserCount()">Obtener Número de Registros</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        async function fetchUserCount() {
+            try {
+                // Hacer la solicitud usando fetch y await
+                const response = await fetch('https://api.github.com/users');
+
+                if (!response.ok) {
+                    throw new Error('Error al obtener datos de usuarios.');
+                }
+
+                // Convertir la respuesta a formato JSON y obtener el número de registros
+                const usersData = await response.json();
+                const userCount = usersData.length;
+
+                // Imprimir el número de registros en el elemento con id "result"
+                displayUserCount(userCount);
+            } catch (error) {
+                // Manejar errores y mostrar mensajes de error en el elemento con id "result"
+                displayError(error.message);
+            }
+        }
+
+        function displayUserCount(count) {
+            // Mostrar el número de registros en el elemento con id "result"
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = `<p>Número de Registros: ${count}</p>`;
+        }
+
+        function displayError(message) {
+            // Mostrar mensajes de error en el elemento con id "result"
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = `<p style="color: red;">${message}</p>`;
+        }
+
+    </script>
+</body>
+</html>
