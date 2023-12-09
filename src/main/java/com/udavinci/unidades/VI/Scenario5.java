@@ -18,7 +18,7 @@ public class Scenario5 {
 
         // Paso 4: Ordenar arrResult de manera descendente
         Arrays.sort(arrResult);
-            reverseArray(arrResult);
+        reverseArray(arrResult);
 
         // Paso 5: Mostrar el contenido de arrResult
         System.out.println("Resultado ordenado de manera descendente: " + Arrays.toString(arrResult));

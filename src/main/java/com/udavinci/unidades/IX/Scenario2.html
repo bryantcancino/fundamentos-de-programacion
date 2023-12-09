@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Usuario GitHub con Fetch</title>
+    <style>
+        /* Agrega estilos si es necesario */
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button onclick="fetchUserData()">Obtener las Keys del JSON</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function fetchUserData() {
+            // Hacer la solicitud usando fetch
+            fetch('https://api.github.com/users/1')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al obtener datos del usuario.');
+                    }
+                    return response.json();
+                })
+                .then(userData => {
+                    // Imprimir las claves del registro completo
+                    displayKeys(Object.keys(userData));
+                })
+                .catch(error => {
+                    displayError(error.message);
+                });
+        }
+
+        function displayKeys(keys) {
+            // Mostrar las claves en el elemento con id "result"
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = `
+                <h2>Claves del Registro Completo:</h2>
+                <ol>
+                    ${keys.map(key => `<li>${key}</li>`).join('')}
+                </ol>
+            `;
+        }
+
+        function displayError(message) {
+            // Mostrar mensajes de error en el elemento con id "result"
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = `<p style="color: red;">${message}</p>`;
+        }
+
+    </script>
+</body>
+</html>
